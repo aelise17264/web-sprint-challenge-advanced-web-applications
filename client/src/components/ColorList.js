@@ -8,7 +8,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors, getColors }) => {
-  console.log(colors);
+  // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 const {id} = useParams()
@@ -46,6 +46,12 @@ const {id} = useParams()
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+    .delete(`api/colors/${color.id}`, color)
+    .then(res =>{
+      updateColors(colors.filter(item => item.id !== color.id))
+    })
+    .catch(error => console.log('error in delete'))
   };
 
   return (
