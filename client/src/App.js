@@ -13,7 +13,7 @@ function App() {
 
     <Switch>
         <Route path="/login" component={Login} />
-        <PrivateRoute path='/Bubbles' component={BubblePage}/>
+        <PrivateRoute path='/BubblePage' component={BubblePage}/>
         </Switch>
         {/* 
           Build a PrivateRoute component that will 
