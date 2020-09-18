@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import {useParams} from 'react-router-dom';
+// import {useParams} from 'react-router-dom';
 
 const initialColor = {
   color: "",
@@ -11,7 +11,7 @@ const ColorList = ({ colors, updateColors, getColors }) => {
   // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-const {id} = useParams()
+// const {id} = useParams()
 
   const editColor = color => {
     setEditing(true);
@@ -30,7 +30,7 @@ const {id} = useParams()
   const saveEdit = e => {
     e.preventDefault();
     axiosWithAuth()
-    .put(`/api/colors/${id}`, colorToEdit)
+    .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
       console.log(res.data)
       updateColors([...colors.filter(item => item.id !== colorToEdit.id),
@@ -59,7 +59,8 @@ const {id} = useParams()
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <li data-testid='colors' 
+          key={color.color} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
